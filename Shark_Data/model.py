@@ -16,13 +16,17 @@ def run_model(input_pitch, input_amount, input_exchange, input_valuation, input_
     dealvoc = "Deal_Status_vocab.pkl"
     sharkloc = "Deal_Shark 1_model.pkl"
     sharkvoc = "Deal_Shark 1_vocab.pkl"
+    path = os.path.join("Shark_Data",dealloc)
+    vocpath = os.path.join("Shark_Data",dealvoc)
+    sharkpath = os.path.join("Shark_Data",sharkloc)
+    sharkvocpath = os.path.join("Shark_Data",sharkvoc)
 
-    deal_model = joblib.load(dealloc)
-    shark_model = joblib.load(dealvoc)
+    deal_model = joblib.load(path)
+    shark_model = joblib.load(sharkpath)
 
     #Deal Model
     transformer = TfidfTransformer()
-    loaded_vectorizer = TfidfVectorizer(decode_error="replace",vocabulary=pickle.load(open(dealvoc, "rb")))
+    loaded_vectorizer = TfidfVectorizer(decode_error="replace",vocabulary=pickle.load(open(vocpath, "rb")))
     tfidf = transformer.fit_transform(loaded_vectorizer.fit_transform(np.array(input_pitch)))
     input_df = pd.DataFrame(tfidf.toarray(), columns=loaded_vectorizer.get_feature_names())
 
@@ -38,7 +42,7 @@ def run_model(input_pitch, input_amount, input_exchange, input_valuation, input_
 
         #Shark Model
         transformer = TfidfTransformer()
-        loaded_vectorizer = TfidfVectorizer(decode_error="replace",vocabulary=pickle.load(open(dealvoc, "rb")))
+        loaded_vectorizer = TfidfVectorizer(decode_error="replace",vocabulary=pickle.load(open(sharkvocpath, "rb")))
         tfidf = transformer.fit_transform(loaded_vectorizer.fit_transform(np.array(input_pitch)))
         input_df_shark = pd.DataFrame(tfidf.toarray(), columns=loaded_vectorizer.get_feature_names())
 
