@@ -12,21 +12,17 @@ from sklearn.externals import joblib
 import os
 
 def run_model(input_pitch, input_amount, input_exchange, input_valuation, input_gender, input_category):
-    dealloc = "Deal_Status_model.pkl"
-    dealvoc = "Deal_Status_vocab.pkl"
-    sharkloc = "Deal_Shark 1_model.pkl"
-    sharkvoc = "Deal_Shark 1_vocab.pkl"
-    path = os.path.join("static","py",dealloc)
-    vocpath = os.path.join("static","py",dealvoc)
-    sharkpath = os.path.join("static","py",sharkloc)
-    sharkvocpath = os.path.join("static","py",sharkvoc)
+    dealloc = "/Deal_Status_model.pkl"
+    dealvoc = "/Deal_Status_vocab.pkl"
+    sharkloc = "/Deal_Shark 1_model.pkl"
+    sharkvoc = "/Deal_Shark 1_vocab.pkl"
 
-    deal_model = joblib.load(path)
-    shark_model = joblib.load(sharkpath)
+    deal_model = joblib.load(dealloc)
+    shark_model = joblib.load(dealvoc)
 
     #Deal Model
     transformer = TfidfTransformer()
-    loaded_vectorizer = TfidfVectorizer(decode_error="replace",vocabulary=pickle.load(open(vocpath, "rb")))
+    loaded_vectorizer = TfidfVectorizer(decode_error="replace",vocabulary=pickle.load(open(dealvoc, "rb")))
     tfidf = transformer.fit_transform(loaded_vectorizer.fit_transform(np.array(input_pitch)))
     input_df = pd.DataFrame(tfidf.toarray(), columns=loaded_vectorizer.get_feature_names())
 
@@ -42,7 +38,7 @@ def run_model(input_pitch, input_amount, input_exchange, input_valuation, input_
 
         #Shark Model
         transformer = TfidfTransformer()
-        loaded_vectorizer = TfidfVectorizer(decode_error="replace",vocabulary=pickle.load(open(sharkvocpath, "rb")))
+        loaded_vectorizer = TfidfVectorizer(decode_error="replace",vocabulary=pickle.load(open(dealvoc, "rb")))
         tfidf = transformer.fit_transform(loaded_vectorizer.fit_transform(np.array(input_pitch)))
         input_df_shark = pd.DataFrame(tfidf.toarray(), columns=loaded_vectorizer.get_feature_names())
 
