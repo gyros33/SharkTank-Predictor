@@ -12,10 +12,10 @@ from sklearn.externals import joblib
 import os
 
 def run_model(input_pitch, input_amount, input_exchange, input_valuation, input_gender, input_category):
-    dealloc = "/Deal_Status_model.pkl"
-    dealvoc = "/Deal_Status_vocab.pkl"
-    sharkloc = "/Deal_Shark 1_model.pkl"
-    sharkvoc = "/Deal_Shark 1_vocab.pkl"
+    dealloc = "Deal_Status_model.pkl"
+    dealvoc = "Deal_Status_vocab.pkl"
+    sharkloc = "Deal_Shark 1_model.pkl"
+    sharkvoc = "Deal_Shark 1_vocab.pkl"
 
     deal_model = joblib.load(dealloc)
     shark_model = joblib.load(dealvoc)
