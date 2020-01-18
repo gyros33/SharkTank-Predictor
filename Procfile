@@ -1,1 +1,1 @@
-web: gunicorn Shark_Data.app:app
+web: gunicorn Shark_Data.app:app --preload
