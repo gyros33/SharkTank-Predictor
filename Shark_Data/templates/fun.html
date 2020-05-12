@@ -26,9 +26,11 @@
                             <form name="learn" action="/funpage" onsubmit="return validateForm()" method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
+                                    <h5>Title</h5>
                                     <input type="input" class="form-control" name="title" id="title" placeholder="Title" value="{{ input_title }}" required>
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <h5>Category</h5>
                                     <select class="form-control" id="cat" name="cat">
                                         <option value="Choose a Category">Choose a Category</option>
                                         {% for each in cats %}
@@ -37,6 +39,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <h5>Gender</h5>
                                     <select type="input" class="form-control" name="gen" id="gen" required>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -47,12 +50,15 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <input type="number" class="form-control" id="val" name="val" placeholder="Valuation (in Dollars)" value="{{ input_valuation }}" required>
+                                    <h5>Valuation</h5>
+                                    <input type="number" class="form-control" id="val" name="val" placeholder="Valuation (Autocalculated)" value="{{ input_valuation }}" disabled="True" required>
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <h5>Asking Amount</h5>
                                     <input type="number" class="form-control" id="ask" name="ask" placeholder="Asking Amount (in Dollars)" value="{{ input_amount }}" required>
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <h5>Stake Offered</h5>
                                     <input type="number" class="form-control" id="stake" name="stake" placeholder="Stake Offered (Percentage)" value="{{ input_exchange }}" required>
                                 </div>
                             </div>

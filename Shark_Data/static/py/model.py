@@ -32,7 +32,6 @@ def run_model(input_pitch, input_amount, input_exchange, input_valuation, input_
 
     input_df.loc[0,"Amount_Asked_For"] = input_amount
     input_df.loc[0,"Exchange_For_Stake"] = input_exchange
-    input_df.loc[0,"Valuation"] = input_valuation
     input_df.loc[0,f"Gender_{input_gender}"] = 1
     input_df.loc[0,f"Category_{input_category}"] = 1
 
@@ -48,7 +47,6 @@ def run_model(input_pitch, input_amount, input_exchange, input_valuation, input_
 
         input_df_shark.loc[0,"Amount_Asked_For"] = input_amount
         input_df_shark.loc[0,"Exchange_For_Stake"] = input_exchange
-        input_df_shark.loc[0,"Valuation"] = input_valuation
         input_df_shark.loc[0,f"Gender_{input_gender}"] = 1
         input_df_shark.loc[0,f"Category_{input_category}"] = 1
 

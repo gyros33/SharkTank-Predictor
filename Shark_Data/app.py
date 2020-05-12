@@ -144,7 +144,7 @@ def funpage():
         input_pitch = [result["pitch"]]
         input_amount = int(result["ask"])
         input_exchange = int(result["stake"])
-        input_valuation = int(result["val"])
+        input_valuation = int(input_amount / (input_exchange / 100))
         input_gender = result["gen"]
         input_category = result["cat"]
 
