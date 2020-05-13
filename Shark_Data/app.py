@@ -7,10 +7,9 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
-
+from sqlalchemy.ext.declarative import declarative_base
 from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-
 from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer
 from string import punctuation
 import nltk
@@ -19,11 +18,14 @@ from nltk.corpus import stopwords
 stopwords = stopwords.words( 'english' ) + list(punctuation)
 stemmer = PorterStemmer()
 import pickle
-
+import json
+from config import master_username, db_password, endpoint, db_instance_name
 import sys
+
 # insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, os.path.join('static','py'))
 from model import run_model
+
 
 app = Flask(__name__)
 
@@ -32,19 +34,17 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-dbname = "SharkTank"
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///db/{dbname}.sqlite"
-db = SQLAlchemy(app)
+app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{master_username}:{db_password}@{endpoint}:5432/{db_instance_name}"
 
-# reflect an existing database into a new model
+db = SQLAlchemy(app)
+#reflect an existing database into a new model
 Base = automap_base()
 # reflect the tables
 Base.prepare(db.engine, reflect=True)
 
 # Save references to each table
 Shark_Table = Base.classes.Shark_Tank
-User_Table = Base.classes.User_Tank
-
+Pitch_Table = Base.classes.Pitch_Table
 
 @app.route("/")
 def index():
@@ -131,8 +131,8 @@ def map():
 
 @app.route('/funpage', methods=['POST','GET'])
 def funpage():
-    cats = ['Health / Wellness', 'Lifestyle / Home', 'Software / Tech','Food and Beverage', 'Business Services','Fashion / Beauty', 'Automotive', 'Media / Entertainment','Fitness / Sports / Outdoor', 'Pet Products', 'Green / Clean Tech', 'Lifesytle / Home', 'Travel', 'Children / Education', 'Uncertain / Other']
-    dbresults = db.session.query(User_Table.Title).all()
+    cats = ['Health / Wellness', 'Lifestyle / Home', 'Software / Tech','Food and Beverage', 'Business Services','Fashion / Beauty', 'Automotive', 'Media / Entertainment','Fitness / Sports / Outdoor', 'Pet Products', 'Green / Clean Tech', 'Travel', 'Children / Education', 'Uncertain / Other']
+    dbresults = db.session.query(Pitch_Table.Title).all()
     titles = [x[0] for x in dbresults]
     img = 0
 
@@ -153,11 +153,11 @@ def funpage():
         
         
         if input_title not in titles:
-            new = User_Table(Title=input_title, Category=input_category, Amount_Asked_For=input_amount, Exchange_For_Stake=input_exchange, Valuation=input_valuation, Description=input_pitch[0])
+            new = Pitch_Table(Title=input_title, Category=input_category, Amount_Asked_For=input_amount, Exchange_For_Stake=input_exchange, Valuation=input_valuation, Description=input_pitch[0])
             db.session.add(new)
             db.session.commit()
 
-        x, y = run_model(input_pitch, input_amount, (input_exchange / 100), input_valuation, input_gender, input_category)
+        x, y = run_model(input_pitch, input_amount, (input_exchange / 100), input_gender, input_category)
         
         if x == 0:
             deal_status = "Sorry, I'm out"
@@ -187,12 +187,12 @@ def funpage():
 
 @app.route('/userpitches')
 def userpitches():
-    results = db.session.query(User_Table).all()
+    results = db.session.query(Pitch_Table).all()
 
     inputs = []
     for result in results:
         inputs.append({
-            "id": result.Id,
+            "id": result.id,
             "title": result.Title,
             "category": result.Category,
             "ask": result.Amount_Asked_For,
@@ -204,12 +204,12 @@ def userpitches():
 
 @app.route('/userpitches/<title>')
 def specific_pitch(title):
-    results = db.session.query(User_Table).filter(User_Table.Title == title).all()
+    results = db.session.query(Pitch_Table).filter(Pitch_Table.Title == title).all()
 
     inputs = []
     for result in results:
         inputs.append({
-            "id": result.Id,
+            "id": result.id,
             "title": result.Title,
             "category": result.Category,
             "ask": result.Amount_Asked_For,
