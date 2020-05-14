@@ -8,16 +8,24 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-import pickle
 import json
 import sys
+
+#Used to run model def
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer
+from string import punctuation
+import pickle
+from sklearn.externals import joblib
 
 #for local use
 # from config import master_username, db_password, endpoint, db_instance_name
 
 #insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, os.path.join('static','py'))
-import run_model
+sys.path.insert(0, os.path.join('static','py'))
+from model import run_model
 
 
 app = Flask(__name__)
