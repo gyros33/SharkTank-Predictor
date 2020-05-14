@@ -24,8 +24,8 @@ from sklearn.externals import joblib
 # from config import master_username, db_password, endpoint, db_instance_name
 
 #insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(0, os.path.join('static','py'))
-from model import run_model
+sys.path.insert(1, os.path.join('static','py'))
+from static.py.model import run_model
 
 
 app = Flask(__name__)
