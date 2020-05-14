@@ -168,7 +168,7 @@ def funpage():
         
         #Makes sure that the title is unique for the database, otherwise they will get an error from the js file
         if input_title not in titles:
-            new = Pitch_Table(self, Title=input_title, Category=input_category, Amount_Asked_For=input_amount, Exchange_For_Stake=input_exchange, Valuation=input_valuation, Description=input_pitch[0])
+            new = Pitch_Table(Title=input_title, Category=input_category, Amount_Asked_For=input_amount, Exchange_For_Stake=input_exchange, Valuation=input_valuation, Description=input_pitch[0])
             db.session.add(new)
             db.session.commit()
 
