@@ -21,7 +21,7 @@ import pickle
 from sklearn.externals import joblib
 
 #for local use
-from config import master_username, db_password, endpoint, db_instance_name
+# from config import master_username, db_password, endpoint, db_instance_name
 
 #insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, os.path.join('static','py'))
@@ -37,10 +37,10 @@ app = Flask(__name__)
 #################################################
 
 #For Web Use
-# master_username = os.environ['master_username']
-# db_password = os.environ['db_password']
-# endpoint = os.environ['endpoint']
-# db_instance_name = os.environ['db_instance_name']
+master_username = os.environ['master_username']
+db_password = os.environ['db_password']
+endpoint = os.environ['endpoint']
+db_instance_name = os.environ['db_instance_name']
 
 #Connect to Amazon RDS Postgres database
 app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{master_username}:{db_password}@{endpoint}:5432/{db_instance_name}"
