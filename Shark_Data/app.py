@@ -9,7 +9,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import json
-import sys
+# import sys
 
 #Used to run model def
 import nltk
@@ -24,7 +24,7 @@ from sklearn.externals import joblib
 # from config import master_username, db_password, endpoint, db_instance_name
 
 #insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, os.path.join('static','py'))
+# sys.path.insert(1, os.path.join('static','py'))
 from .static.py.model import run_model
 
 
