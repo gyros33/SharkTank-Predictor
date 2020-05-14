@@ -1,4 +1,9 @@
 # Project Three - Project Two Continued!
+## Version 1.1 Changelog
+-Improved Deal Status prediction accuracy, percision, and recall, by transforming the data to account for pitches where multiple sharks have gone in on the deal. Also by tuning the Multinomial NB model alpha value.
+-Instead of taking valuation as a factor in the model, it is now just a number that is calculated by the ask amount / stake. In otherwords it's not cosmetic
+-Added heading to the predictor input boxes for clarity
+
 
 ## Project Proposal
 

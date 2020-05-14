@@ -105,11 +105,11 @@ function clearForms() {
         return false;
     }
 
-    if (inval <= 0) {
-        alert.style.display = "flex";
-        alert.innerHTML = "The value of your company must be more than zero";
-        return false;
-    }
+    // if (inval <= 0) {
+    //     alert.style.display = "flex";
+    //     alert.innerHTML = "The value of your company must be more than zero";
+    //     return false;
+    // }
 
     if (inask <= 0) {
         alert.style.display = "flex";
