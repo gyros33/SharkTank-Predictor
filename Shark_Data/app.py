@@ -25,7 +25,7 @@ from sklearn.externals import joblib
 
 #insert at 1, 0 is the script path (or '' in REPL)
 # sys.path.insert(1, os.path.join('static','py'))
-from app.static.py.model import run_model
+from .model import run_model
 
 
 app = Flask(__name__)
