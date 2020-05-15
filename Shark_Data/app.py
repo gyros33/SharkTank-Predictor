@@ -65,7 +65,8 @@ def index():
 @app.route("/names")
 def names():
     """Return a list of sample names."""
-
+    #close db connections
+    db.engine.dispose()
     # Use Pandas to perform the sql query
     stmt = db.session.query(Shark_Table).statement
     df = pd.read_sql_query(stmt, db.session.bind)
@@ -77,7 +78,8 @@ def names():
 @app.route("/pitches")
 def pitches():
     """Return a list of sample names."""
-
+    #close db connections
+    db.engine.dispose()
     # Use Pandas to perform the sql query
     stmt = db.session.query(Shark_Table).statement
     df = pd.read_sql_query(stmt, db.session.bind)
@@ -95,6 +97,8 @@ def pitches():
 @app.route("/sharks")
 def sharks():
     """Return a list of sample names."""
+    #close db connections
+    db.engine.dispose()
 
     results = db.session.query(Shark_Table).all()
 
@@ -150,6 +154,9 @@ def funpage():
     #Predifine categories. Consider doing this programattically from the Shark_Table
     cats = ['Health / Wellness', 'Lifestyle / Home', 'Software / Tech','Food and Beverage', 'Business Services','Fashion / Beauty', 'Automotive', 'Media / Entertainment','Fitness / Sports / Outdoor', 'Pet Products', 'Green / Clean Tech', 'Travel', 'Children / Education', 'Uncertain / Other']
     
+    #close db connections
+    db.engine.dispose()
+
     #Populate the list of previously submitted pitches from teh database
     dbresults = db.session.query(Pitch_Table.Title).all()
     titles = [x[0] for x in dbresults]
@@ -204,6 +211,9 @@ def funpage():
 #pulls all the user pitches stored in the database
 @app.route('/userpitches')
 def userpitches():
+    #close db connections
+    db.engine.dispose()
+
     results = db.session.query(Pitch_Table).all()
 
     inputs = []
@@ -222,6 +232,9 @@ def userpitches():
 #Will pull user created pitches in order to populate the pitch predictor tool with already submitted pitches
 @app.route('/userpitches/<title>')
 def specific_pitch(title):
+    #close db connections
+    db.engine.dispose()
+    
     results = db.session.query(Pitch_Table).filter(Pitch_Table.Title == title).all()
 
     inputs = []
