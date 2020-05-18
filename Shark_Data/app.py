@@ -165,8 +165,8 @@ def funpage():
     #When data is submitted to the predictor, gather this data
     if request.method == 'POST':
         result = request.form
-        input_title = result["title"]
-        input_pitch = [result["pitch"]]
+        input_title = result["title"].strip()
+        input_pitch = [result["pitch"]].strip()
         input_amount = int(result["ask"])
         input_exchange = int(result["stake"])
         input_valuation = int(input_amount / (input_exchange / 100))

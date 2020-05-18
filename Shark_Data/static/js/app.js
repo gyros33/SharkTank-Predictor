@@ -72,7 +72,7 @@ function clearForms() {
     } else {
     const inputdata = await d3.json("/userpitches/" + newSample)
     fillForms(inputdata[0]);
-    document.learn.submit();
+    // document.learn.submit();
     }
   }
 
@@ -95,8 +95,8 @@ function clearForms() {
     
     if (droplist.includes(intitle)) {
       alert.style.display = "flex";
-      alert.innerHTML = "Title already exists";
-      return false;
+      alert.innerHTML = "Title already exists. If this is a new pitch, in order to save it you must enter a unique title.";
+      return true;
     }
 
     if (incata == "choose a category") {
