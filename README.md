@@ -1,3 +1,5 @@
+Known Issues: Currently the model seems to run correctly when entering a new pitch, but when resubmitting an entry from the previous entries list, it seems to change it's result to Laurie Granger for all user input pitches.
+
 # Project Three - Project Two Continued!
 ## Version 1.1 Changelog
 -Improved Deal Status prediction accuracy, percision, and recall, by transforming the data to account for pitches where multiple sharks have gone in on the deal. Also by tuning the Multinomial NB model alpha value.
