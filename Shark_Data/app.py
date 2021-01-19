@@ -20,12 +20,12 @@ from string import punctuation
 import pickle
 from sklearn.externals import joblib
 
-#for local use
+# for local testing use
 # from config import master_username, db_password, endpoint, db_instance_name
 
 #insert at 1, 0 is the script path (or '' in REPL)
 # sys.path.insert(1, os.path.join('static','py'))
-from .static.py.model import run_model
+from static.py.model import run_model
 
 
 app = Flask(__name__)
@@ -157,7 +157,7 @@ def funpage():
     #close db connections
     db.engine.dispose()
 
-    #Populate the list of previously submitted pitches from teh database
+    #Populate the list of previously submitted pitches from the database
     dbresults = db.session.query(Pitch_Table.Title).all()
     titles = [x[0] for x in dbresults]
     img = 0

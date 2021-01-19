@@ -16,6 +16,13 @@ function fillForms(sample) {
     pitch.value = sample.description
 };
 
+function removeResult() {
+    const sharkpicture = document.getElementById('shark');
+    const sharkstatus = document.getElementById('deal_status');
+    sharkpicture.src='';
+    sharkstatus.innerHTML = "";
+}
+
 function clearForms() {
 
     const title = document.getElementById('title');
@@ -72,6 +79,7 @@ function clearForms() {
     } else {
     const inputdata = await d3.json("/userpitches/" + newSample)
     fillForms(inputdata[0]);
+    removeResult();
     // document.learn.submit();
     }
   }
@@ -93,11 +101,11 @@ function clearForms() {
       return false;
     }
     
-    if (droplist.includes(intitle)) {
-      alert.style.display = "flex";
-      alert.innerHTML = "Title already exists. If this is a new pitch, in order to save it you must enter a unique title.";
-      return true;
-    }
+    // if (droplist.includes(intitle)) {
+    //   alert.style.display = "flex";
+    //   alert.innerHTML = "Title already exists. If this is a new pitch, in order to save it you must enter a unique title.";
+    //   return false;
+    // }
 
     if (incata == "choose a category") {
         alert.style.display = "flex";
